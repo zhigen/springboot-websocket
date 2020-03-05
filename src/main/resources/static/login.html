@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+<input type="text" id="login" onkeypress="return onKeyPress(event)">
+
+<script type="text/javascript">
+    function onKeyPress(e) {
+        var keyCode = null;
+        if (e.which) {
+            keyCode = e.which;
+        } else if (e.keyCode) {
+            keyCode = e.keyCode;
+        }
+        if (keyCode === 13) {
+            login();
+            return false;
+        }
+        return true;
+    }
+
+    function login() {
+        var login = document.getElementById("login").value;
+        document.cookie = "login:" + login;
+        window.location.href = "index.html";
+    }
+</script>
+</body>
+</html>

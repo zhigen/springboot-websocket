@@ -28,13 +28,19 @@ public class TestController {
 
     @MessageMapping("/say")
     @SendTo("/listen")
-    public String say(String body) {
+    public String sayByMessageMapping(String body) {
         return body;
     }
 
     @ResponseBody
     @GetMapping("/say/{msg}")
-    public void shou(@PathVariable String msg) {
+    public void say(@PathVariable String msg) {
         messagingTemplate.convertAndSend("/listen", msg);
+    }
+
+    @ResponseBody
+    @GetMapping("/say/{msg}/{user}")
+    public void say(@PathVariable String msg, @PathVariable String user) {
+        messagingTemplate.convertAndSend("/" + user + "/listen", msg);
     }
 }

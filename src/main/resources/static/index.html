@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>主页</title>
     <script src="https://cdn.bootcss.com/sockjs-client/1.3.0/sockjs.js"></script>
     <script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.js"></script>
 </head>
@@ -15,6 +15,11 @@
 <script type="text/javascript">
     connect();
 
+    var login = document.cookie.split(";")[0].split(":")[1];
+    if (login === undefined) {
+        login = "游客";
+    }
+
     function connect() {
         // websocket的连接地址，此值等于WebSocketMessageBrokerConfigurer中registry.addEndpoint("/websocket").withSockJS()配置的地址
         var socket = new SockJS('/websocket');
@@ -23,12 +28,15 @@
             stompClient.subscribe('/listen', function (respnose) {
                 document.getElementById("listen").innerHTML += respnose.body + "<br>";
             });
+            stompClient.subscribe('/' + login + '/listen', function (respnose) {
+                document.getElementById("listen").innerHTML += respnose.body + "<br>";
+            });
+            join();
         });
-        join();
     }
 
     function join() {
-        stompClient.send("/join", {}, "join");
+        stompClient.send("/join", {}, login + " join");
     }
 
     function onKeyPress(e) {
