@@ -18,7 +18,7 @@ class ApplicationTests {
     @Test
     void contextLoads() {
         String s = "test";
-        Assertions.assertNotNull(s, "test");
+        Assertions.assertNotNull(s, "s not be null");
         log.info(s);
     }
 
