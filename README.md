@@ -8,8 +8,8 @@
 
 ## <div id="01"></div>
 ## 1 创建项目
-> 参照或复制springboot-maven项目
-            
+> 参照或复制[springboot-maven](https://github.com/zhigen/springboot-maven)
+
 ## <div id="02"></div>
 ## 2 编写代码
     2.1、pom.xml引入依赖

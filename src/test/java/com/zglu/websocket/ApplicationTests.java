@@ -1,4 +1,4 @@
-package com.zglu.maven;
+package com.zglu.websocket;
 
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
@@ -17,9 +17,9 @@ class ApplicationTests {
 
     @Test
     void contextLoads() {
-        String s = "test";
-        Assertions.assertNotNull(s, "s not be null");
-        log.info(s);
+        String test = "test";
+        Assertions.assertNotNull(test, "test must not be null!");
+        log.info(test);
     }
 
 }

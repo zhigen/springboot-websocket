@@ -1,4 +1,4 @@
-package com.zglu.maven;
+package com.zglu.websocket;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;

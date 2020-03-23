@@ -10,19 +10,21 @@
 <div>
     收到消息:<br>
     <span id="listen"></span>
-    <input type="text" id="say" onkeypress="return onKeyPress(event)">
+    <label for="say">发送消息：</label>
+    <textarea id="say"></textarea>
+    <button onclick="say()">发送消息</button>
 </div>
 <script type="text/javascript">
-    connect();
-
     var login = document.cookie.split(";")[0].split(":")[1];
     if (login === undefined) {
         login = "游客";
     }
 
+    connect();
+
     function connect() {
         // websocket的连接地址，此值等于WebSocketMessageBrokerConfigurer中registry.addEndpoint("/websocket").withSockJS()配置的地址
-        var socket = new SockJS('/websocket');
+        let socket = new SockJS('/websocket');
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function (frame) {
             stompClient.subscribe('/listen', function (respnose) {
@@ -37,20 +39,6 @@
 
     function join() {
         stompClient.send("/join", {}, login + " join");
-    }
-
-    function onKeyPress(e) {
-        var keyCode = null;
-        if (e.which) {
-            keyCode = e.which;
-        } else if (e.keyCode) {
-            keyCode = e.keyCode;
-        }
-        if (keyCode === 13) {
-            say();
-            return false;
-        }
-        return true;
     }
 
     function say() {
